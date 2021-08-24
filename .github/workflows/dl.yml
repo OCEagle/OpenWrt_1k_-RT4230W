@@ -93,6 +93,15 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
+        tar zcvf dl.tar.gz dl/
+        curl -sL https://git.io/cowtransfer | sh
+        ./cowtransfer dl.tar.gz >> 1.log
+        cat 1.log
+    - name: Compile the firmware
+      id: printf
+      run: |
+        cd openwrt
+        cat 1.log
     - name: Compile the firmware
       id: compile
       run: |
